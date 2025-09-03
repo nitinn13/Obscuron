@@ -21,7 +21,7 @@ import { randomBytes } from 'tweetnacl-util'; // Use a browser-compatible crypto
 // You will need to import your program's IDL
 import { Computebounty } from "./compute_bounty"
 
-const arciumEnv = getArciumEnv();
+// const arciumEnv = getArciumEnv();
 
 export async function computeBounty(
   provider: anchor.AnchorProvider,

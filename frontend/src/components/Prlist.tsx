@@ -62,7 +62,7 @@ const Prlist = () => {
 
     const getPrs = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/github/repos/${owner}/${name}`, {
+        const response = await axios.get(`https://obscuronbackend.nitinxdev.fun/api/github/repos/${owner}/${name}`, {
           headers: {
             Authorization: JSON.parse(localStorage.getItem("token") as string)
           }

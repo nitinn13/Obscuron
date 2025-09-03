@@ -48,7 +48,7 @@ const Dashboard = ({ children }: { children: React.ReactNode }) => {
     const postCode = async () => {
       try {
         const response = await fetch(
-          "http://localhost:3000/api/github/auth/callback",
+          "https://obscuronbackend.nitinxdev.fun/api/github/auth/callback",
           {
             method: "POST",
             headers: {
@@ -122,9 +122,26 @@ const Dashboard = ({ children }: { children: React.ReactNode }) => {
               </div>
 
             </div>
+<<<<<<< HEAD
           </WalletModalProvider>
         </WalletProvider>
       </ConnectionProvider >
+=======
+            <div className="flex flex-col gap-2 py-4">
+              {links.map((link, index) => <SidebarLink key={index} link={link} className="gap-4" />)}
+            </div>
+          </SidebarBody>
+        </Sidebar>
+        <div className="w-full flex-col">
+          <div className="absolute top-4 right-4 flex gap-2 bg-[#0A0A0A] z-50">
+          </div>
+          <WalletNavbar />
+          <div className="bg-primary w-full rounded-tl-[3rem]">
+            {children}
+          </div>
+        </div>
+      </div>
+>>>>>>> ee91aa3 (Update frontend code)
     )
   }
 }
