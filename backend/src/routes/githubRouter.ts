@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import { fetchPrs, fetchRepos, getUserMetamaskAddress, githubAuth } from "../controllers";
+import { fetchPrs, fetchRepos, getUserSolanaAddress, githubAuth } from "../controllers";
 import authMiddleware from "../middlewares/authMiddleware";
 
 const githubRouter =  express.Router();
@@ -16,6 +16,6 @@ githubRouter.get("/repos", authMiddleware, fetchRepos);
 
 githubRouter.get("/repos/:owner/:name", authMiddleware, fetchPrs);
 
-githubRouter.get("/users/:username", authMiddleware, getUserMetamaskAddress);
+githubRouter.get("/users/:username", authMiddleware, getUserSolanaAddress);
 
 export default githubRouter;
