@@ -85,7 +85,7 @@ export async function computeBounty(
       )
       .accountsPartial({
         computationAccount: getComputationAccAddress(program.programId, computationOffset),
-        clusterAccount: arciumEnv.arciumClusterPubkey,
+        clusterAccount: "",
         mxeAccount: getMXEAccAddress(program.programId),
         mempoolAccount: getMempoolAccAddress(program.programId),
         executingPool: getExecutingPoolAccAddress(program.programId),
