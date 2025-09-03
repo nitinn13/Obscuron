@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "./hooks/use-outside-click";
-import { Bounty } from "./bounty";
 import { BountyApp } from "./BountyApp";
 
 export const CloseIcon = () => {
@@ -178,12 +177,12 @@ const Prlist = () => {
               <div>
                 <div className="flex justify-between items-start p-4">
                   <div className="">
-                    <motion.h
+                    <motion.h3
                       layoutId={`title-${active.title}-${id}`}
                       className="font-bold text-neutral-700 dark:text-neutral-200"
                     >
                       {active.title}
-                    </motion.h>
+                    </motion.h3>
                     <motion.p
                       layoutId={`description-${active.description}-${id}`}
                       className="text-neutral-600 dark:text-neutral-400"
@@ -267,8 +266,7 @@ const Prlist = () => {
                 <span onClick={(e) => {
                   e.stopPropagation()
                 }}>
-                  <Bounty contributor={pr.contributor}/>
-                  {/* <BountyApp/> */}
+                  <BountyApp contributor={pr.contributor}/>
                 </span>
               </div>
 

@@ -37,13 +37,6 @@ export function Bounty({ onSubmit, contributor, reward }: BountyProps) {
     const [effort, setEffort] = useState("")
     const [quality, setQuality] = useState("")
     const [error, setError] = useState("")
-<<<<<<< HEAD
-    const [comment, setComment] = useState("");
-    const [isOpen, setIsOpen] = useState(false);
-    const [reward, setReward] = useState("")
-
-
-=======
     const [comment, setComment] = useState("")
     const [isOpen, setIsOpen] = useState(false)
     const [contributorAddress, setContributorAddress] = useState<string | null>(null)
@@ -53,7 +46,6 @@ export function Bounty({ onSubmit, contributor, reward }: BountyProps) {
     
     const wallet = useWallet()
     const { connection } = useConnection()
->>>>>>> ee91aa3 (Update frontend code)
 
     useEffect(() => {
         const getContributorAddress = async () => {

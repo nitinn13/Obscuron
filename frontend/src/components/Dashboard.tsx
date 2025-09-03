@@ -2,18 +2,10 @@ import { useEffect, useState } from "react"
 import { Sidebar, SidebarBody, SidebarLink } from "./ui/sidebar"
 import { Folders, HomeIcon, SidebarCloseIcon, SidebarOpenIcon } from "lucide-react";
 import { useAuth } from "./Layout";
-import { Router, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react';
-import {
-  WalletModalProvider,
-  WalletDisconnectButton,
-  WalletMultiButton,
-  WalletConnectButton
-} from '@solana/wallet-adapter-react-ui';
-import '@solana/wallet-adapter-react-ui/styles.css';
-import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 import handleLogout from "../utils/handleLogout";
+import { WalletNavbar } from "./WalletNavbar";
 
 const links = [
   {
@@ -35,9 +27,6 @@ const Dashboard = ({ children }: { children: React.ReactNode }) => {
   const code = params.get("code");
   const auth = useAuth();
   const navigation = useNavigate();
-  const wallet = useWallet();
-  const { connection } = useConnection()
-  // const router = Router();
 
   useEffect(() => {
     if (!code && !auth?.authStatus) {
@@ -90,58 +79,32 @@ const Dashboard = ({ children }: { children: React.ReactNode }) => {
 
   if ((code && authStatus === "Successful") || (!code && auth?.authStatus)) {
     return (
-      <ConnectionProvider endpoint={"https://devnet.helius-rpc.com/?api-key=cd40c28a-094c-4961-a346-666e2a421f94"}>
-        <WalletProvider wallets={[]} autoConnect>
-          <WalletModalProvider>
-            <div className="flex min-h-screen w-full text-white bg-[#0A0A0A]">
-              <Sidebar open={open} setOpen={setOpen} animate={true}>
-                <SidebarBody>
-                  <div className="py-4">
-                    {open ? <SidebarCloseIcon /> : <SidebarOpenIcon />}
-                  </div>
-                  <div className="flex flex-col gap-2 py-4">
-                    {links.map((link, index) => <SidebarLink key={index} link={link} className="gap-4" />)}
-                  </div>
-                </SidebarBody>
-              </Sidebar>
-              <div className="w-full flex-col">
-                <div className="absolute top-4 right-4 flex gap-2 bg-[#0A0A0A]">
-                  {!wallet.publicKey && <WalletMultiButton className=" text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-300 text-sm" />}
-                  {wallet.publicKey && <WalletDisconnectButton className=" text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-300 text-sm" />}
-                  <button
-                    className="relative flex items-center justify-center gap-2 bg-black px-6 py-3 text-white font-medium transition-all duration-200 group-hover:bg-white group-hover:text-black"
-                    onClick={() => {
-                      handleLogout()
-                      auth?.setAuthStatus(null)
-                      // router.push("/")
-                    }}>Logout</button>
-                </div>
-                <div className="bg-primary w-full rounded-tl-[3rem]">
-                  {children}
-                </div>
-              </div>
-
+      <div className="flex min-h-screen w-full text-white bg-[#0A0A0A]">
+        <Sidebar open={open} setOpen={setOpen} animate={true}>
+          <SidebarBody>
+            <div className="py-4">
+              {open ? <SidebarCloseIcon /> : <SidebarOpenIcon />}
             </div>
-<<<<<<< HEAD
-          </WalletModalProvider>
-        </WalletProvider>
-      </ConnectionProvider >
-=======
             <div className="flex flex-col gap-2 py-4">
               {links.map((link, index) => <SidebarLink key={index} link={link} className="gap-4" />)}
             </div>
           </SidebarBody>
         </Sidebar>
         <div className="w-full flex-col">
-          <div className="absolute top-4 right-4 flex gap-2 bg-[#0A0A0A] z-50">
-          </div>
+          {/* <div className="absolute top-4 right-4 flex gap-2 bg-[#0A0A0A] z-50">
+            <button
+              className="relative flex items-center justify-center gap-2 bg-black px-6 py-3 text-white font-medium transition-all duration-200 hover:bg-gray-800"
+              onClick={() => {
+                handleLogout()
+                auth?.setAuthStatus(null)
+              }}>Logout</button>
+          </div> */}
           <WalletNavbar />
           <div className="bg-primary w-full rounded-tl-[3rem]">
             {children}
           </div>
         </div>
       </div>
->>>>>>> ee91aa3 (Update frontend code)
     )
   }
 }

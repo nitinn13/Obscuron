@@ -1,32 +1,40 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfill';
-import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill';
+import { nodePolyfills } from 'vite-plugin-node-polyfills';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    nodePolyfills()
+  ],
   base: '/',
+  define: {
+    global: 'globalThis',
+    'process.env': {},
+    'process.version': JSON.stringify('v18.0.0'),
+    'process.versions': JSON.stringify({ node: '18.0.0' }),
+  },
   resolve: {
     alias: {
-      crypto: 'crypto-browserify',
       stream: 'stream-browserify',
+      crypto: 'crypto-browserify',
       buffer: 'buffer',
-      process: 'process/browser'
-    }
+      util: 'util',
+      events: 'events',
+      string_decoder: 'string_decoder',
+    },
   },
   optimizeDeps: {
-    esbuildOptions: {
-      define: {
-        global: 'globalThis'
-      },
-      plugins: [
-        NodeGlobalsPolyfillPlugin({
-          buffer: true,
-          process: true
-        }),
-        NodeModulesPolyfillPlugin()
-      ]
-    }
-  }
+    include: [
+      'buffer',
+      'stream-browserify',
+      'crypto-browserify',
+      'util',
+      'events',
+      'string_decoder',
+      '@arcium-hq/client',
+    ],
+    exclude: ['@arcium-hq/client'],
+  },
 });
