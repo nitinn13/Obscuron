@@ -1,39 +1,66 @@
-# 🔐 Encrypted GitHub Bounty Dispenser
+# Obscuron – Encrypted GitHub Bounty Dispenser  
 
-This project is built as part of the **Arcium Fellowship**, with the goal of creating a privacy-preserving bounty distribution system for open-source contributions using **Arcium's gMPC stack** and **Solana**.
+[![Deployed on Vercel](https://img.shields.io/badge/Frontend-Vercel-blue)](https://obscuron-d8my.vercel.app/)  
+[![Solana Devnet](https://img.shields.io/badge/Program-Solana%20Devnet-9cf)](https://explorer.solana.com/address/6MUHFNw3WeuDP1Gm1UZR1yUouN6nVYguBEHEF2vmw5Dt?cluster=devnet)  
 
-Maintainers can securely score pull requests and compute contributor rewards based on encrypted inputs—ensuring fairness and transparency without revealing sensitive scoring data.
+Obscuron is an **Arcium Fellowship project** that brings **confidential computing** to open-source funding.  
+It enables GitHub maintainers to **fairly distribute bounties** across contributors while keeping the computation of rewards **encrypted and privacy-preserving**.  
 
----
-
-## 🌐 Live Preview
-
-> ⚠️ Not deployed yet — running locally for PoC  
-
----
-
-## ⚙️ Features
-
-- ✅ GitHub Login via OAuth
-- ✅ Fetches all PRs from selected repo
-- ✅ Maintainer inputs encrypted **effort**, **quality**, and **length** scores
-- ✅ Encrypted computation using **Arcium MXE**
-- ✅ Solana wrapper program to queue computation and handle callback
-- 🔐 Zero-knowledge bounty calculation (secure via gMPC)
+With Obscuron, maintainers can:  
+- 🔑 Log in with **GitHub**  
+- 👀 View **open pull requests**  
+- 📝 Assign qualitative metrics (**effort, quality, length**)  
+- 🔐 Trigger **private MPC computation** via **Arcium’s MXE (Multiparty Execution Environment)**  
+- 💸 Automatically **distribute rewards on Solana** using a secure smart contract  
 
 ---
 
-## 🏗️ Architecture
+## ✨ Key Features  
 
-![Architecture Diagram](./assets/architecture.png)
+### 🔐 Arcium MPC Integration  
+- Uses **Arcium MXE** for private bounty calculations.  
+- Maintainers’ inputs (effort, quality, length) are **never exposed in plaintext**.  
+- The MPC generates an **encrypted, verifiable bounty split**.  
+- Guarantees **confidentiality**, **integrity**, and **trustlessness**.  
+
+### 🌐 Web3 Backend (Solana)  
+- Rewards distributed via a **Solana Program** on **Devnet**  
+  [`6MUHFNw3WeuDP1Gm1UZR1yUouN6nVYguBEHEF2vmw5Dt`](https://explorer.solana.com/address/6MUHFNw3WeuDP1Gm1UZR1yUouN6nVYguBEHEF2vmw5Dt?cluster=devnet)  
+- Maintainers fund a **treasury wallet**, payouts are automated after MPC results.  
+
+### 🛠 Maintainer Workflow  
+1. Authenticate with GitHub OAuth.  
+2. Fetch and display open PRs.  
+3. Assign evaluation metrics.  
+4. Submit → **MPC computes encrypted payout**.  
+5. Solana program distributes rewards to contributor wallets.  
 
 ---
 
-## 💡 Technologies Used
+## 🌍 Live Demo  
 
-- Frontend: React, TailwindCSS, Framer Motion
-- Backend: Node.js, Express, GitHub OAuth
-- Blockchain: Solana (Anchor), Arcium gMPC (MXE, encrypted-ixs, wrapper program)
+- Frontend: [https://obscuron-d8my.vercel.app/](https://obscuron-d8my.vercel.app/)  
+- Solana Program: [View on Explorer](https://explorer.solana.com/address/6MUHFNw3WeuDP1Gm1UZR1yUouN6nVYguBEHEF2vmw5Dt?cluster=devnet)  
 
 ---
 
+## 📂 Tech Stack  
+
+- **Frontend**: Next.js, TailwindCSS, GitHub OAuth  
+- **Backend**: Node.js, Express, Arcium MXE, Solana Web3.js  
+- **Blockchain**: Solana Devnet Smart Contract  
+
+---
+
+## 🚀 Architecture  
+
+```mermaid
+flowchart TD
+    A[Maintainer] -->|Login| B[GitHub OAuth]
+    B --> C[View Open PRs]
+    C --> D[Assign Metrics]
+    D --> E[Encrypted Submission to Arcium MXE]
+    E --> F[MPC Computation]
+    F --> G[Backend Receives Result]
+    G --> H[Solana Program]
+    H --> I[Contributors Paid in Wallets]
